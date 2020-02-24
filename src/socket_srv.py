@@ -1,3 +1,6 @@
+import sys
+sys.path.append('./utils')
+
 import socket
 from msg_util import print_msg
 

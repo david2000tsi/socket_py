@@ -1,3 +1,6 @@
+import sys
+sys.path.append('./utils')
+
 import socket
 from file_util import client_log
 from msg_util import print_msg
@@ -5,7 +8,7 @@ from msg_util import print_msg
 HOST = '127.0.0.1'
 PORT = 8000
 CLOSE_SOCK = '\\quit'
-LOG_FILE = 'logs/socket_cli.log'
+LOG_FILE = '../logs/socket_cli.log'
 
 # Create socket.
 def soket_cli():
