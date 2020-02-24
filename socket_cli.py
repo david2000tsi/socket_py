@@ -2,6 +2,7 @@ import socket
 
 HOST = '127.0.0.1'
 PORT = 8000
+CLOSE_SOCK = 'quit'
 
 def soket_cli():
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -10,11 +11,13 @@ def soket_cli():
 	print ('Trying to connect in socket...\n')
 	tcp.connect(dest)
 
-	msg = input('Write a message please\n')
-	while len(msg) > 0:
+	while True:
+		msg = input('Write a message please\n')
 		tcp.send(msg.encode())
 		print ('Sending: [', msg, ']')
-		msg = input('Write a new message please\n')
+
+		if CLOSE_SOCK in msg:
+			break
 
 	print ('Closing connection\n')
 	tcp.close()

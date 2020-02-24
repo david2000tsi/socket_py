@@ -2,6 +2,7 @@ import socket
 
 HOST = '127.0.0.1'
 PORT = 8000
+CLOSE_SOCK = 'quit'
 
 def socket_srv():
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,6 +18,9 @@ def socket_srv():
 		while True:
 			msg = con.recv(1024)
 			if not msg:
+				break
+
+			if CLOSE_SOCK in msg.decode():
 				break
 
 			print ('Client: [', client, '] msg: [', msg, ']')
