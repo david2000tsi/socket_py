@@ -1,5 +1,6 @@
 import os.path
 from os import path
+from msg_util import print_msg
 
 # Create log of all messages.
 def client_log(filename, msg):
@@ -10,7 +11,7 @@ def client_log(filename, msg):
 		open_mode = 'a'
 	
 	file = open(filename, open_mode)
-	print('LOG: [', msg, ']', ' (saving to ', file_status, 'file)')
+	print_msg('LOG: [' + str(msg) + ']' + ' (saving to ' + str(file_status) + 'file)')
 
 	file.write(msg)
 	file.write('\n')
