@@ -1,8 +1,12 @@
-from datetime_util import get_datetime_str
+from datetime_util import DatetimeUtil
 
-def mk_msg(msg):
-	return str('(' + get_datetime_str() + ') [' + str(msg) + ']')
+class MsgUtil:
 
-def print_msg(msg):
-	print(mk_msg(msg))
-	return
+	# Mount formatted message with datetime.
+	def mk_msg(msg):
+		return str('(' + DatetimeUtil.get_datetime_str() + ') [' + str(msg) + ']')
+
+	# Print formatted message.
+	def print_msg(msg):
+		print(MsgUtil.mk_msg(msg))
+		return
