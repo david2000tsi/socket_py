@@ -4,6 +4,7 @@ sys.path.append('./utils')
 import socket
 from msg_util import MsgUtil
 from constants import Constants
+from signal_util import Signal
 
 class SocketSrv:
 
@@ -37,6 +38,7 @@ class SocketSrv:
 		return
 
 def main():
+	Signal.add_signal()
 	SocketSrv.create()
 	return
 

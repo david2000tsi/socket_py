@@ -6,16 +6,19 @@ class FileUtil:
 
 	# Create log of all messages.
 	def client_log(filename, msg):
-		file_status = ''
+		MsgUtil.print_msg('LOG: (saving to file) [' + str(msg) + ']')
+		FileUtil.write_to_file(filename, msg, True);
+		return
+
+	def write_to_file(filename, msg, insert_new_line):
 		open_mode = 'w'
 		if(path.exists(filename)):
-			file_status = 'existing '
 			open_mode = 'a'
-		
-		file = open(filename, open_mode)
-		MsgUtil.print_msg('LOG: [' + str(msg) + ']' + ' (saving to ' + str(file_status) + 'file)')
 
+		file = open(filename, open_mode)
 		file.write(msg)
-		file.write('\n')
+		if(insert_new_line):
+			file.write('\n')
+
 		file.close()
 		return
