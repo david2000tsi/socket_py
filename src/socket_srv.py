@@ -30,7 +30,7 @@ class SocketSrv:
 				if Constants.CLOSE_SOCK_KW in msg.decode():
 					break
 
-				MsgUtil.print_msg('Client: [' + str(client) + '] msg: [' + str(msg) + ']')
+				MsgUtil.print_msg('Client: [' + str(client) + '] Msg: [' + msg.decode() + ']')
 
 			MsgUtil.print_msg('Closing connection')
 			con.close()

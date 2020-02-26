@@ -1,7 +1,10 @@
 import sys
+sys.path.append('./utils')
+
 import os
 from sys import platform
 from cryptography.fernet import Fernet
+from signal_util import Signal
 
 class Cryptography:
 
@@ -97,6 +100,7 @@ class Bash:
 		return
 
 def main():
+	Signal.add_signal()
 	Bash.run()
 	return
 
