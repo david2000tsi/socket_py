@@ -2,39 +2,42 @@ import sys
 sys.path.append('./utils')
 
 import socket
-from msg_util import print_msg
+from msg_util import MsgUtil
+from constants import Constants
 
-HOST = '127.0.0.1'
-PORT = 8000
-CLOSE_SOCK = '\\quit'
+class SocketSrv:
 
-def socket_srv():
-	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	srv = (HOST, PORT)
+	def __init__(self):
+		return
 
-	tcp.bind(srv)
-	tcp.listen(1)
+	# Create server socket.
+	def create():
+		tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		srv = (Constants.HOST, Constants.PORT)
 
-	while True:
-		con, client = tcp.accept()
-		print_msg('Client: [' + str(client) + '] connected')
+		tcp.bind(srv)
+		tcp.listen(Constants.MAX_CONN_SERVER)
 
 		while True:
-			msg = con.recv(1024)
-			if not msg:
-				break
+			con, client = tcp.accept()
+			MsgUtil.print_msg('Client: [' + str(client) + '] connected')
 
-			if CLOSE_SOCK in msg.decode():
-				break
+			while True:
+				msg = con.recv(Constants.MAX_BYTES_RECV_SRV)
+				if not msg:
+					break
 
-			print_msg('Client: [' + str(client) + '] msg: [' + str(msg) + ']')
+				if Constants.CLOSE_SOCK_KW in msg.decode():
+					break
 
-		print_msg('Closing connection')
-		con.close()
-	return
+				MsgUtil.print_msg('Client: [' + str(client) + '] msg: [' + str(msg) + ']')
+
+			MsgUtil.print_msg('Closing connection')
+			con.close()
+		return
 
 def main():
-	socket_srv()
+	SocketSrv.create()
 	return
 
 if __name__ == '__main__':

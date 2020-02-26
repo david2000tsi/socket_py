@@ -10,7 +10,7 @@ $ cd src/
 $ python socket_srv.py
 ```
 
-#### Run client and send messages (the connection wil be closed when a message with '\quit' is sent):
+#### Run client and send messages (the connection wil be closed when a message with '\q' is sent):
 ```
 $ python socket_cli.py
 ```

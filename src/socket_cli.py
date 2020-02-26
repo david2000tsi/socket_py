@@ -2,38 +2,39 @@ import sys
 sys.path.append('./utils')
 
 import socket
-from file_util import client_log
-from msg_util import print_msg
+from file_util import FileUtil
+from msg_util import MsgUtil
+from constants import Constants
 
-HOST = '127.0.0.1'
-PORT = 8000
-CLOSE_SOCK = '\\quit'
-LOG_FILE = '../logs/socket_cli.log'
+class SocketCli:
 
-# Create socket.
-def soket_cli():
-	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	dest = (HOST, PORT)
+	def __init__(self):
+		return
 
-	print_msg('Trying to connect in socket...')
-	tcp.connect(dest)
-	print_msg('Use \'' + CLOSE_SOCK + '\' to close socket')
+	# Create client socket.
+	def create():
+		tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		dest = (Constants.HOST, Constants.PORT)
 
-	while True:
-		msg = input('Write a message please\n')
-		client_log(LOG_FILE, msg)
-		tcp.send(msg.encode())
-		print_msg('Sending: [' + str(msg) + ']')
+		MsgUtil.print_msg('Trying to connect in socket...')
+		tcp.connect(dest)
+		MsgUtil.print_msg('Use \'' + Constants.CLOSE_SOCK_KW + '\' to close socket')
 
-		if CLOSE_SOCK in msg:
-			break
+		while True:
+			msg = input('Write a message please\n')
+			FileUtil.client_log(Constants.CLIENT_LOG_FILENAME, msg)
+			tcp.send(msg.encode())
+			MsgUtil.print_msg('Sending: [' + str(msg) + ']')
 
-	print_msg('Closing connection')
-	tcp.close()
-	return
+			if Constants.CLOSE_SOCK_KW in msg:
+				break
+
+		MsgUtil.print_msg('Closing connection')
+		tcp.close()
+		return
 
 def main():
-	soket_cli()
+	SocketCli.create()
 	return
 
 if __name__ == '__main__':
